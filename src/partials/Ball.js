@@ -6,10 +6,20 @@ export default class Ball {
       this.boardWidth = boardWidth;
       this.boardHeight = boardHeight;
       this.direction = 1;
+      this.ping = new Audio('public/sounds/pong-01.wav');
+
       this.reset();
       // this.color = 
       
     } // end of constructor
+
+
+    // add Goal method
+    goal(player){
+      player.score++;
+      this.reset();
+      console.log(player.score);
+    } // end of goal method
 
     reset() {
       this.x = this.boardWidth / 2;
@@ -21,6 +31,9 @@ export default class Ball {
       }
       this.vx = this.direction * (6 - Math.abs(this.vy));
     } // end of reset
+
+
+
 
     wallCollision(){
         const hitLeft = this.x - this.radius <=0;
@@ -46,6 +59,7 @@ export default class Ball {
           (this.y >= topY && this.y <= bottomY)
         ){
           this.vx = -this.vx;
+          this.ping.play();
         } // end of if
       } else {
         //check the paddle collision
@@ -58,10 +72,12 @@ export default class Ball {
 
         ){
           this.vx = -this.vx;
+          this.ping.play();
         }
       }
       
-    }
+    } // paddlecollision
+
 
     render(svg, player1, player2) {
       // update x position with vector direction 60 times a second
@@ -71,16 +87,25 @@ export default class Ball {
         this.wallCollision();
         this.paddleCollision(player1,player2);
 
+        //draw ball
         let circle =  document.createElementNS(SVG_NS, 'circle');
         circle.setAttributeNS(null, 'r', '8');
         circle.setAttributeNS(null, 'cx', this.x); // x position
-        circle.setAttributeNS(null, 'cy', this.y);
+        circle.setAttributeNS(null, 'cy', this.y); // y of the position
         circle.setAttributeNS(null, 'fill', '#FCBCD2');
 
         svg.appendChild(circle);
 
+        const rightGoal = this.x + this.radius >= this.boardWidth;
+        const leftGoal = this.x - this.radius <= 0;
+        if(rightGoal){
+          this.goal(player1);
+          this.direction = 1;
+        } else if (leftGoal){
+          this.goal(player2);
+          this.direction = -1;
+        }
 
-
-    }
-
+    } // end of render method
+  
   } // end of Ball classs

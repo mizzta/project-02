@@ -1,4 +1,4 @@
-import { SVG_NS} from "../settings.js";
+import { SVG_NS } from "../settings.js";
 
 
 export default class Paddle {
@@ -71,16 +71,6 @@ export default class Paddle {
       rect.setAttributeNS(null,'rx', '5');
       rect.setAttributeNS(null,'ry', '5');
     svg.appendChild(rect);
-
-//     let rect = document.createElementNS(SVG_NS, 'rect');
-//     rect.setAttributeNS(null, 'fill', '#B5E8AC');
-//     rect.setAttributeNS(null, 'width', this.width);
-//     rect.setAttributeNS(null, 'height', this.height);
-//     rect.setAttributeNS(null, 'stroke', 'black');
-//     rect.setAttributeNS(null, 'x', '502');
-//     rect.setAttributeNS(null, 'y', this.y);
-//   svg.appendChild(rect);
-
 
 
     }
