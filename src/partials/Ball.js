@@ -22,7 +22,7 @@ export default class Ball {
       this.vx = this.direction * (6 - Math.abs(this.vy));
     } // end of reset
 
-    wallCollission(){
+    wallCollision(){
         const hitLeft = this.x - this.radius <=0;
         const hitRight = this.x + this.radius >= this.boardWidth;
         const hitTop = this.y - this.radius <= 0;
@@ -33,6 +33,34 @@ export default class Ball {
           this.vy = -this.vy;
         }
 
+    } // end of wallcollision
+
+    paddleCollision(player1, player2){
+      if (this.vx > 0) {
+        //ball is moving right and only check for player2
+        let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height);
+        let [leftX, rightX, topY, bottomY] = paddle;
+        if(
+          (this.x + this.radius >= leftX) &&
+          (this.x + this.radius <= rightX) &&
+          (this.y >= topY && this.y <= bottomY)
+        ){
+          this.vx = -this.vx;
+        } // end of if
+      } else {
+        //check the paddle collision
+        let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
+        let [leftX, rightX, topY, bottomY] = paddle;
+        if (
+          (this.x - this.radius <= rightX) &&
+          (this.x - this.radius >= leftX) &&
+          (this.y >= topY && this.y <= bottomY)
+
+        ){
+          this.vx = -this.vx;
+        }
+      }
+      
     }
 
     render(svg, player1, player2) {
@@ -40,7 +68,8 @@ export default class Ball {
         this.x += this.vx;
         this.y += this.vy;
 
-        this.wallCollission();
+        this.wallCollision();
+        this.paddleCollision(player1,player2);
 
         let circle =  document.createElementNS(SVG_NS, 'circle');
         circle.setAttributeNS(null, 'r', '8');
