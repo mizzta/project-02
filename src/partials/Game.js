@@ -39,9 +39,26 @@ export default class Game {
 
     this.Ball = new Ball(8, this.width, this.height);
 
+    document.addEventListener('keydown', (event) =>{
+      console.log(event);
+      switch(event.key){
+        case KEYS.spaceBar:
+          this.pause = !this.pause;
+        break;
+      }
+      console.log(this.pause);
+    });
+
 } // end of constructor (only one constructor)
 
+
+
 render() {
+  if (this.pause){
+    return;
+    //this line will not run
+  }
+
   // More code goes here....
   // add the code from the slide
   this.gameElement.innerHTML = '';
