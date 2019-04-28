@@ -22,8 +22,8 @@ export default class Game {
       this.paddleHeight,
       this.boardGap,
       ((this.height - this.paddleHeight) / 2), // y position of paddle
-          KEYS.a,
-          KEYS.z
+      KEYS.a,
+      KEYS.z
     );
 
 
@@ -40,48 +40,49 @@ export default class Game {
 
     this.ball = new Ball(8, this.width, this.height);
 
-    this.score1 = new Score(this.width /2 - 50, 30, 30);
-    this.score2 = new Score(this.width /2 + 25, 30, 30);
+    this.score1 = new Score(this.width / 2 - 50, 30, 30);
+    this.score2 = new Score(this.width / 2 + 25, 30, 30);
 
-    document.addEventListener('keydown', (event) =>{
+    document.addEventListener('keydown', (event) => {
       console.log(event);
-      switch(event.key){
+    
+      switch (event.key) {
         case KEYS.spaceBar:
           this.pause = !this.pause;
-        break;
+          break;
       }
       console.log(this.pause);
     });
 
-} // end of constructor (only one constructor)
+  } // end of constructor (only one constructor)
 
 
 
-render() {
-  if (this.pause){
-    return;
-    //this line will not run
+  render() {
+    if(this.pause) {
+      return;
+      //this line will not run
+    }
+
+    // More code goes here....
+    // add the code from the slide
+    this.gameElement.innerHTML = '';
+
+    let svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttributeNS(null, "width", this.width);
+    svg.setAttributeNS(null, "height", this.height);
+    svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
+    this.gameElement.appendChild(svg);
+
+
+    // the board should be the first or else you may have a bad time
+    this.board.render(svg);
+    this.player1.render(svg);
+    this.player2.render(svg);
+    this.ball.render(svg, this.player1, this.player2);
+
+    this.score1.render(svg, this.player1.score);
+    this.score2.render(svg, this.player2.score);
   }
-
-  // More code goes here....
-  // add the code from the slide
-  this.gameElement.innerHTML = '';
-
-  let svg = document.createElementNS(SVG_NS, "svg");
-  svg.setAttributeNS(null, "width", this.width);
-  svg.setAttributeNS(null, "height", this.height);
-  svg.setAttributeNS(null, "viewBox", `0 0 ${this.width} ${this.height}`);
-  this.gameElement.appendChild(svg);
-
-
-// the board should be the first or else you may have a bad time
-  this.board.render(svg);
-  this.player1.render(svg);
-  this.player2.render(svg);
-  this.ball.render(svg, this.player1, this.player2);
-  
-  this.score1.render(svg, this.player1.score);
-  this.score2.render(svg, this.player2.score);
-}
 
 } // end of Game class
