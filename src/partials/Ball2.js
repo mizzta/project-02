@@ -7,7 +7,7 @@ export default class Ball2 {
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
     this.direction = 1;
-    this.ping = new Audio('public/sounds/pong-02.wav');
+    this.ping = new Audio('public/sounds/pong-03.wav');
 
     this.reset();
   } // end of constructor 
@@ -52,6 +52,7 @@ export default class Ball2 {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
+        player1.height += 20;
         this.ping.play();
       } // end of if
     } else {
@@ -65,6 +66,7 @@ export default class Ball2 {
 
       ) {
         this.vx = -this.vx;
+        player2.height += 20;
         this.ping.play();
       }
     }

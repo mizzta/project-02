@@ -1,33 +1,23 @@
 import { SVG_NS } from "../settings";
 
 
-export default class Ball {
+export default class Ball3 {
   constructor(radius, boardWidth, boardHeight) {
     this.radius = radius;
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
     this.direction = 1;
-    this.ping = new Audio('public/sounds/pong-01.wav');
+    this.ping = new Audio('public/sounds/pong-04.wav');
 
     this.reset();
-  } // end of constructor
+  } // end of constructor 
+
 
   goal(player) {
     player.score++;
     this.reset();
     console.log(player.score);
   } // end of goal method
-
-  // addBall(){
-  //   if (this.goal){
-      
-  //   }
-  // }
-
-  // speedUp() {
-  //   this.reset();
-  //   this.ball++;
-  // }
 
   reset() {
     this.x = this.boardWidth / 2;
@@ -38,8 +28,6 @@ export default class Ball {
       this.vy = Math.floor(Math.random() * 10 - 5);
     }
     this.vx = this.direction * (6 - Math.abs(this.vy));
-
-
   } // end of reset
 
   wallCollision() {
@@ -64,7 +52,6 @@ export default class Ball {
         (this.y >= topY && this.y <= bottomY)
       ) {
         this.vx = -this.vx;
-        player1.height -= 10;
         this.ping.play();
       } // end of if
     } else {
@@ -78,20 +65,12 @@ export default class Ball {
 
       ) {
         this.vx = -this.vx;
-        player2.height -= 10;
         this.ping.play();
       }
     }
 
   } // end of paddlecollision
 
-  // hitPaddle(ball, player1, player2)
-  //   if (hitPaddle){
-  //       let hitPaddle = (player2.x, player2.y, player2.width, player2.height);
-  //       let [leftX, rightX, topY, bottomY] = paddle;
-  //       if()
-  //   }
-  //   );
 
 
   render(svg, player1, player2) {
@@ -106,10 +85,10 @@ export default class Ball {
 
     //draw ball
     let circle = document.createElementNS(SVG_NS, 'circle');
-    circle.setAttributeNS(null, 'r', '8');
+    circle.setAttributeNS(null, 'r', '7');
     circle.setAttributeNS(null, 'cx', this.x); // x position
     circle.setAttributeNS(null, 'cy', this.y); // y position
-    circle.setAttributeNS(null, 'fill', '#FCBCD2');
+    circle.setAttributeNS(null, 'fill', '#EADC8C');
 
     svg.appendChild(circle);
 
@@ -125,4 +104,4 @@ export default class Ball {
 
   } // end of render method
 
-} // end of ball classs
+} // end of ball3 classs
