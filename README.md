@@ -4,8 +4,8 @@ A basic pong game using SVGs.
 
 Game starts with 3 balls. 
 You will score 1 point when the opponent couldn't catch the ball.
-However, if the "Blue" ball hit opponent's paddle, the your paddle will increase the width; 
-         if the "Pink" ball hit opponent's paddle, the your paddle will shrink; 
+However, if the "Blue" ball hit opponent's paddle, your paddle will grow a bit; 
+         if the "Pink" ball hit opponent's paddle, your paddle will shrink; 
          if the "Yellow" ball was being hitted, nothing will happen.
 
 
