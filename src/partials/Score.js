@@ -1,4 +1,4 @@
-import { SVG_NS, KEYS } from "../settings";
+import { SVG_NS } from "../settings";
 
 
 export default class Score {
@@ -6,7 +6,7 @@ export default class Score {
     this.x = x;
     this.y = y;
     this.size = size;
-  }
+  } // end of constructor
 
   render(svg, score) {
     let text = document.createElementNS(SVG_NS, 'text');
@@ -20,4 +20,4 @@ export default class Score {
     svg.appendChild(text);
   }
 
-}
+} // end of score class

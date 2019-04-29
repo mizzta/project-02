@@ -24,26 +24,11 @@ export default class Paddle {
     });
   }
   // end of constructor
-  // arrow function sdon't have a this context, that means this is still refering to the object that we make when we say const player1=new paddle();
-  // ()=> {}
-
-  //has it's own context for this which can cause issues.
-  //function(){}
 
   up() {
     this.y = this.y - this.speed;
     this.y = Math.max(0, this.y - this.speed);
-    // if(this.y <= 0 ) {
-    //     this.y = 0 ;
-    // }
-    // get the max number...
-    // either 0 or the y position minus speed
-    // current y position of the paddle  -10px 
-
-
-
   }
-
 
   down() {
     this.y = this.y + this.speed;
@@ -58,9 +43,7 @@ export default class Paddle {
     return [leftX, rightX, topY, bottomY];
   }
 
-
   render(svg) {
-    //...
     let rect = document.createElementNS(SVG_NS, 'rect');
     rect.setAttributeNS(null, 'fill', '#B5E8AC');
     rect.setAttributeNS(null, 'width', this.width);
@@ -70,9 +53,8 @@ export default class Paddle {
     rect.setAttributeNS(null, 'y', this.y);
     rect.setAttributeNS(null, 'rx', '5');
     rect.setAttributeNS(null, 'ry', '5');
+
     svg.appendChild(rect);
-
-
   }
 
-}
+} // end of paddle class
